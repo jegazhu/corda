@@ -334,9 +334,8 @@ class ReconnectingCordaRPCOps private constructor(
                             throw RPCException("User does not have permission to perform operation ${method.name}.", e)
                         }
                         else -> {
-                            log.warn("Failed to perform operation ${method.name}. Unknown error. Retrying....", e)
-                            reconnectingRPCConnection.reconnectOnError(e)
-                            checkIfIsStartFlow(method, e)
+                            log.warn("Failed to perform operation ${method.name}.", e)
+                            throw e
                         }
                     }
                     lastException = e.targetException
